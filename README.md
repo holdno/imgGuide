@@ -29,3 +29,9 @@ config.itemWidth // 展柜模式右侧可选区图片的宽度
 config.itemHeight // 展柜模式右侧可选区图片的高度
 config.totalWidth // 整个组件的宽度
 ```
+
+### 效果  
+默认样式
+![imgGuide默认样式](http://img.holdno.com/WechatIMG94.jpeg)  
+点击图片后显示展柜样式  
+![imgGuide展柜样式](http://img.holdno.com/WechatIMG106.jpeg)
