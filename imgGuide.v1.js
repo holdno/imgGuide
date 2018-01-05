@@ -1,12 +1,14 @@
+// github: https://github.com/holdno/imgGuide
+
 var sgImgGuide = function(dom, config){
   if(config){
-    this.width = config.width
-    this.height = config.height
-    this.interval = config.interval
-    this.listNum = config.listNum
-    this.itemWidth = config.itemWidth
-    this.itemHeight = config.itemHeight
-    this.totalWidth = config.totalWidth
+    this.width = config.width // 列表模式图片的宽度
+    this.height = config.height // 列表模式图片的高度
+    this.interval = config.interval  // 图片的间距
+    this.listNum = config.listNum  // 展柜模式右侧可选区显示图片的数量
+    this.itemWidth = config.itemWidth // 展柜模式右侧可选区图片的宽度
+    this.itemHeight = config.itemHeight // 展柜模式右侧可选区图片的高度
+    this.totalWidth = config.totalWidth // 整个组件的宽度
   }else{
     this.width = 120
     this.height = 120
@@ -15,33 +17,28 @@ var sgImgGuide = function(dom, config){
     this.itemWidth = 120
     this.itemHeight = 80
     this.totalWidth = 765
-    this.totalHeight = 0
-    this.count = 0
-    this.yMax = 0
   }
+  // 下面三个属性是自动计算出来的
+  this.totalHeight = 0
+  this.count = 0
+  this.yMax = 0
   
   // 如果dom传入的是一个字符串 则通过该字符串获取dom对象
   if(Object.prototype.toString.call(dom) === "[object String]"){
     dom = document.querySelector(dom)
   }
 
-  this.randomString = function(len) {
-  　　len = len || 32;
-  　　var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678' // 默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1
-  　　var maxPos = chars.length
-  　　var pwd = ''
-  　　for (i = 0; i < len; i++) {
-  　　  pwd += chars.charAt(Math.floor(Math.random() * maxPos))
-  　　}
-  　　return pwd
-  },
+  var imgItem = dom.querySelectorAll('.img-list__item')
+  if(!imgItem[0]){ // 如果不存在图片元素则终止运行
+    return false
+  }
+
   this.foreach = function(doms, func){
     var length = doms.length
     for(var i = 0; i < length; i++){
       func.call(this, doms[i], i)
     }
   },
-  this.domList = [],
   this.imgGuide = function(dom, e){
     var imgList = dom.querySelector('.img-list')
     if(imgList.style.display == '' || imgList.style.display == 'block'){
@@ -75,9 +72,7 @@ var sgImgGuide = function(dom, config){
     }
     // 设置左右居中
     var w = maxWidth - img.width
-    console.log(w)
     if(w > 0){
-      console.log(w)
       currentImg.style.marginLeft = w / 2 + 'px'
     }
     
@@ -87,7 +82,6 @@ var sgImgGuide = function(dom, config){
       currentImg.style.marginTop = h / 2 + 'px'
     }
     
-    console.log(index)
     if(index > 1 && this.count - index > 0){
       var y = (this.height + this.interval) / 2 * (index * 2 - 3)
       if(y > this.yMax){
@@ -107,7 +101,6 @@ var sgImgGuide = function(dom, config){
     var go = true
     var i = 0
     while(go){
-      console.log(e.parentNode)
       if(e.parentNode.getAttribute('class') == 'showguide-comment-img'){
         var dom = e.parentNode
         dom.querySelector('.img-list').style.display = 'block'
@@ -122,7 +115,6 @@ var sgImgGuide = function(dom, config){
         break
       }
     }
-    console.log(e)
   },
   this.prev = function(){
     var e = window.event || arguments.callee.caller.arguments[0]
@@ -164,7 +156,6 @@ var sgImgGuide = function(dom, config){
         var slider = dom.querySelector('.img-guide__list-slider')
         var yNow = slider.getAttribute('data-y')
         var len = Number(yNow) + Number(this.height) + Number(this.interval)
-        console.log(len)
         if(len > this.yMax){
           var y = this.yMax
         }else{
@@ -260,16 +251,12 @@ var sgImgGuide = function(dom, config){
     imgGuide.appendChild(close)
     imgGuide.appendChild(currentGuide)
     imgGuide.appendChild(listGuide)
-    console.log(this.count)
     this.yMax = ((this.height + this.interval) * this.count) - ((this.height + this.interval) * this.listNum)
-    console.log(this.yMax)
     this.totalHeight = (this.height + this.interval) * this.listNum - this.interval + 80 // 80是上下两个按钮的位置
 
     return imgGuide
   }
   
-  var random = this.randomString(5)
-  var imgItem = dom.querySelectorAll('.img-list__item')
   this.foreach(imgItem, function(v, k){
     // 给每个图片设置宽高
     v.style.width = this.itemWidth + 'px'
@@ -278,7 +265,7 @@ var sgImgGuide = function(dom, config){
     v.setAttribute('data-index', k)
   })
   this.count = imgItem.length
-  dom.setAttribute('data-modelId', random)
+  
   dom.appendChild(this.makeGuide(imgItem))
   dom.querySelector('.img-list').onclick = (function(){
     var e = window.event || arguments.callee.caller.arguments[0]
