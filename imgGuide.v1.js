@@ -190,11 +190,11 @@ var sgImgGuide = function(dom, config){
     //    <img class="img-guide__current-img" src=""/>
     //  </div>
     //  <div class="img-guide__list">
-    //    <div class="img-guide__list-item" style="background-image: url(http://www.showguide.cn/expoApi/Public/specialPic/20170525/c6dd241674c3f47046e8cdc7394ec6f6.0x750x421.jpg)"></div> 
-    //    <div class="img-guide__list-item" style="background-image: url(http://www.showguide.cn/expoApi/Public/specialPic/20170525/dcd00c16486578c5f1efeedc2e3bac2f.0x750x421.jpg)"></div> 
-    //    <div class="img-guide__list-item" style="background-image: url(http://www.showguide.cn/expoApi/Public/specialPic/20170525/6d492cd4b2ac10f7e54cf2eb8df13db4.0x750x421.jpg)"></div> 
-    //    <div class="img-guide__list-item" style="background-image: url(http://www.showguide.cn/expoApi/Public/specialPic/20170525/56e9031bd8737e07cf07bd793222b4bd.0x750x1336.jpg)"></div> 
-    //    <div class="img-guide__list-item" style="background-image: url(http://www.showguide.cn/expoApi/Public/specialPic/5259.jpg)"></div> 
+    //    <div class="img-guide__list-item" style="background-image: url(xxx)"></div> 
+    //    <div class="img-guide__list-item" style="background-image: url(xxx)"></div> 
+    //    <div class="img-guide__list-item" style="background-image: url(xxx)"></div> 
+    //    <div class="img-guide__list-item" style="background-image: url(xxx)"></div> 
+    //    <div class="img-guide__list-item" style="background-image: url(xxx)"></div> 
     //  </div>
     // </div>
     var length = imgdomlist.length
